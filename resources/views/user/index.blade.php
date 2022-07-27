@@ -75,7 +75,7 @@
         $('#modal-form form').attr('action', url);
         $('#modal-form [name=_method]').val('post');
         $('#modal-form [name=name]').focus();
-
+        $('#modal-form [name=level]').attr('required', true);
         $('#password, #password_confirmation').attr('required', true);
     }
 
@@ -87,13 +87,13 @@
         $('#modal-form form').attr('action', url);
         $('#modal-form [name=_method]').val('put');
         $('#modal-form [name=name]').focus();
-
         $('#password, #password_confirmation').attr('required', false);
 
         $.get(url)
             .done((response) => {
                 $('#modal-form [name=name]').val(response.name);
                 $('#modal-form [name=email]').val(response.email);
+                $('#modal-form [name=level]').val(response.level);
             })
             .fail((errors) => {
                 alert('Tidak dapat menampilkan data');

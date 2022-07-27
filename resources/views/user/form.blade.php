@@ -43,6 +43,18 @@
                             <span class="help-block with-errors"></span>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="level" class="col-lg-3 col-lg-offset-1 control-label">Level</label>
+                        <div class="col-lg-6">
+                            <select name="level" id="level" class="form-control" required>
+                                <option value="">pilih role user</option>
+                                <option value="1">Owner</option>
+                                <option value="2">Administrator</option>
+                                <option value="3">Kasir</option>
+                            </select>
+                            <span class="help-block with-errors"></span>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-flat btn-primary"><i class="fa fa-save"></i> Simpan</button>
