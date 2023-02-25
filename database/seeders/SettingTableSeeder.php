@@ -16,11 +16,11 @@ class SettingTableSeeder extends Seeder
     {
         DB::table('setting')->insert([
             'id_setting' => 1,
-            'nama_perusahaan' => 'Apotek Pharmasix',
+            'nama_perusahaan' => 'Toko Kripik Mantap',
             'alamat' => 'Jl. Batang batang Utara No.76',
             'telepon' => '087702029102',
             'tipe_nota' => 1,
-            'diskon' => 5,
+            'diskon' => 0,
             'path_logo' => '/img/logo.png',
             'path_kartu_member' => '/img/member.png',
         ]);
