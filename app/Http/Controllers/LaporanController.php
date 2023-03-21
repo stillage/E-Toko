@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pembelian;
 use App\Models\Pengeluaran;
 use App\Models\Penjualan;
+use App\Models\Produk;
 use Illuminate\Http\Request;
 use PDF;
 
@@ -37,6 +38,8 @@ class LaporanController extends Controller
             $total_penjualan = Penjualan::where('created_at', 'LIKE', "%$tanggal%")->sum('bayar');
             $total_pembelian = Pembelian::where('created_at', 'LIKE', "%$tanggal%")->sum('bayar');
             $total_pengeluaran = Pengeluaran::where('created_at', 'LIKE', "%$tanggal%")->sum('nominal');
+            $stok = Produk::where('created_at', 'LIKE', "%$tanggal%")->sum('stok');
+            $stoknow = Produk::sum('stok');
 
             $pendapatan = $total_penjualan - $total_pembelian - $total_pengeluaran;
             $total_pendapatan += $pendapatan;
@@ -48,6 +51,7 @@ class LaporanController extends Controller
             $row['pembelian'] = format_uang($total_pembelian);
             $row['pengeluaran'] = format_uang($total_pengeluaran);
             $row['pendapatan'] = format_uang($pendapatan);
+            $row['stok'] = $stok;
 
             $data[] = $row;
         }
@@ -59,6 +63,7 @@ class LaporanController extends Controller
             'pembelian' => '',
             'pengeluaran' => 'Total Pendapatan',
             'pendapatan' => format_uang($total_pendapatan),
+            'stok' => $stoknow
         ];
 
         return $data;
