@@ -5,22 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TokenController extends Controller
 {
     public function login(Request $request) {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
-
-        if (!auth()->attempt($request->only('email','password'))){
-            return new AuthenticationException();
+        if (!Auth::attempt($request->only('email', 'password')))
+        {
+            return response()
+                ->json(['message' => 'Unauthorized'], 401);
         }
 
-        return [
-            'token' => $request->user()->createToken($request->deviceId)->plainTextToken
-        ];
+        $user = User::where('email', $request['email'])->firstOrFail();
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return response()
+            ->json(['message' => 'Hi '.$user->name.', welcome to home','access_token' => $token, 'token_type' => 'Bearer', ]);
+
     }
 
     public function user(Request $request) {
