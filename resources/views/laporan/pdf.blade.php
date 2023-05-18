@@ -25,6 +25,7 @@
                 <th>Pembelian</th>
                 <th>Pengeluaran</th>
                 <th>Pendapatan</th>
+                <th>Stok</th>
             </tr>
         </thead>
         <tbody>
